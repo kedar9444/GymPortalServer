@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="749716fece6846b68702b2a22cbac2fd" Name="Diagram1">
-        <EntityTypeShape EntityType="GymPortalModel.fee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GymPortalModel.user" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="f93563402f6a4bb1a7adf18e45f2a095" Name="Diagram1">
+        <EntityTypeShape EntityType="GymPortalModel.Fee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPortalModel.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="GymPortalModel.FK_fees_fees" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

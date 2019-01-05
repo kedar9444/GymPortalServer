@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Kedar9$$$\Desktop\MVC projects\GymPortal.Data\GymPortal.Data\GymPortalEntityModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Kedar9$$$\Desktop\MVC projects\GymPortalServer\GymPortal.Data\GymPortalModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

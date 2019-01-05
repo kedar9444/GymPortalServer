@@ -12,12 +12,21 @@ namespace GymPortal.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Fees = new HashSet<Fee>();
+        }
+    
         public int userId { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
         public string activationEndDate { get; set; }
         public Nullable<bool> isSuspended { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fee> Fees { get; set; }
     }
 }

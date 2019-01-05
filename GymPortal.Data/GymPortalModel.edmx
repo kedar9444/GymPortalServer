@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="GymPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="fees">
+        <EntityType Name="Fees">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -16,7 +16,7 @@
           <Property Name="endDate" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="paidDate" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="users">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
@@ -27,23 +27,23 @@
           <Property Name="isSuspended" Type="bit" />
         </EntityType>
         <Association Name="FK_fees_fees">
-          <End Role="fees" Type="Self.fees" Multiplicity="1" />
-          <End Role="fees1" Type="Self.fees" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Fees" Type="Self.Fees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="fees">
-              <PropertyRef Name="id" />
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
             </Principal>
-            <Dependent Role="fees1">
-              <PropertyRef Name="id" />
+            <Dependent Role="Fees">
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GymPortalModelStoreContainer">
-          <EntitySet Name="fees" EntityType="Self.fees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fees" EntityType="Self.Fees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_fees_fees" Association="Self.FK_fees_fees">
-            <End Role="fees" EntitySet="fees" />
-            <End Role="fees1" EntitySet="fees" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Fees" EntitySet="Fees" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -51,7 +51,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GymPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="fee">
+        <EntityType Name="Fee">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -61,10 +61,9 @@
           <Property Name="startDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="endDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="paidDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="fees1" Relationship="Self.FK_fees_fees" FromRole="fees" ToRole="fees1" />
-          <NavigationProperty Name="fee1" Relationship="Self.FK_fees_fees" FromRole="fees1" ToRole="fees" />
+          <NavigationProperty Name="User" Relationship="Self.FK_fees_fees" FromRole="Fees" ToRole="Users" />
         </EntityType>
-        <EntityType Name="user">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
@@ -73,25 +72,26 @@
           <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="activationEndDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isSuspended" Type="Boolean" />
+          <NavigationProperty Name="Fees" Relationship="Self.FK_fees_fees" FromRole="Users" ToRole="Fees" />
         </EntityType>
         <Association Name="FK_fees_fees">
-          <End Role="fees" Type="Self.fee" Multiplicity="1" />
-          <End Role="fees1" Type="Self.fee" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Fees" Type="Self.Fee" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="fees">
-              <PropertyRef Name="id" />
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
             </Principal>
-            <Dependent Role="fees1">
-              <PropertyRef Name="id" />
+            <Dependent Role="Fees">
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GymPortalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="fees" EntityType="Self.fee" />
-          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="Fees" EntityType="Self.Fee" />
+          <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_fees_fees" Association="Self.FK_fees_fees">
-            <End Role="fees" EntitySet="fees" />
-            <End Role="fees1" EntitySet="fees" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Fees" EntitySet="Fees" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -100,9 +100,9 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GymPortalModelStoreContainer" CdmEntityContainer="GymPortalEntities">
-          <EntitySetMapping Name="fees">
-            <EntityTypeMapping TypeName="GymPortalModel.fee">
-              <MappingFragment StoreEntitySet="fees">
+          <EntitySetMapping Name="Fees">
+            <EntityTypeMapping TypeName="GymPortalModel.Fee">
+              <MappingFragment StoreEntitySet="Fees">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
@@ -112,9 +112,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="GymPortalModel.user">
-              <MappingFragment StoreEntitySet="users">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GymPortalModel.User">
+              <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />

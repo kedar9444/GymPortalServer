@@ -12,7 +12,7 @@ namespace GymPortal.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class fee
+    public partial class Fee
     {
         public int id { get; set; }
         public int userId { get; set; }
@@ -21,7 +21,6 @@ namespace GymPortal.Data
         public string endDate { get; set; }
         public string paidDate { get; set; }
     
-        public virtual fee fees1 { get; set; }
-        public virtual fee fee1 { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace GymPortal.Data
         public GymPortalEntities()
             : base("name=GymPortalEntities")
         {
+            // Database.SetInitializer<GymPortalEntities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,7 +26,7 @@ namespace GymPortal.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<fee> fees { get; set; }
-        public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<Fee> Fees { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
