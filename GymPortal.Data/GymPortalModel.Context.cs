@@ -18,7 +18,6 @@ namespace GymPortal.Data
         public GymPortalEntities()
             : base("name=GymPortalEntities")
         {
-            // Database.SetInitializer<GymPortalEntities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

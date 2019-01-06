@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GymPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GymPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Fees">
           <Key>
             <PropertyRef Name="id" />
@@ -25,6 +25,7 @@
           <Property Name="surname" Type="nvarchar" MaxLength="50" />
           <Property Name="activationEndDate" Type="nvarchar" MaxLength="50" />
           <Property Name="isSuspended" Type="bit" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_fees_fees">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -46,8 +47,7 @@
             <End Role="Fees" EntitySet="Fees" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GymPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -73,6 +73,7 @@
           <Property Name="activationEndDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isSuspended" Type="Boolean" />
           <NavigationProperty Name="Fees" Relationship="Self.FK_fees_fees" FromRole="Users" ToRole="Fees" />
+          <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_fees_fees">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
@@ -115,6 +116,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GymPortalModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />

@@ -18,6 +18,17 @@ namespace GymPortal.Services
             _userRepository = userRepository;
         }
 
+        public int Add(User user)
+        {
+            // check existing user present
+            var userExist = _userRepository.SingleOrDefault(x => x.name.ToLower() == user.name.ToLower() && x.surname.ToLower() == user.surname.ToLower());
+            if (userExist != null)
+            {
+                return 0;
+            }
+            return _userRepository.Add(user).userId;
+        }
+
         public User Get(int id)
         {
             return _userRepository.Get(id);
@@ -30,7 +41,7 @@ namespace GymPortal.Services
 
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAll().ToList();
         }
     }
 }

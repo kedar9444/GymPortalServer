@@ -9,18 +9,9 @@ namespace GymPortal.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService _userService;
-
-        public HomeController(IUserService userService)
-        {
-            _userService = userService;
-        }
-
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            var a = _userService.GetCount();
-
             return View();
         }
     }

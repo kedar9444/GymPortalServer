@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ContextConfig.cs" />
     <Compile Include="Fee.cs">
       <DependentUpon>GymPortalModel.tt</DependentUpon>
     </Compile>

@@ -1,11 +1,11 @@
-﻿using GymPortal.Data.Interfaces.Context;
-using GymPortal.Data.Interfaces.Repository;
+﻿using GymPortal.Data.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using GymPortal.Data.Configuration;
 
 namespace GymPortal.Data.Repository
 {
@@ -14,37 +14,41 @@ namespace GymPortal.Data.Repository
         //_Context is base class object used in all derivesd classes
         protected readonly GymPortalEntities _Context = null;
 
-        public Repository(GymPortalEntities context)
+        //public Repository(GymPortalEntities context)
+        //{
+        //    _Context = new GymPortalEntities();
+        //}
+
+        public Repository()
         {
-            if (_Context == null)
-                _Context = new GymPortalEntities();
-            else
-                _Context = context as GymPortalEntities;
+            _Context = ContextConfig.ConfigureContext();
         }
 
-        public void Add(TEntity entity)
+        public TEntity Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            var user = _Context.Set<TEntity>().Add(entity);
+            ContextConfig.SaveChanges();
+            return user;
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _Context.Set<TEntity>().AddRange(entities);
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _Context.Set<TEntity>().Where(predicate);
         }
 
         public TEntity Get(int id)
         {
-            throw new NotImplementedException();
+            return _Context.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _Context.Set<TEntity>().ToList();
         }
 
         public int GetCount()
@@ -54,17 +58,27 @@ namespace GymPortal.Data.Repository
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            _Context.Set<TEntity>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _Context.Set<TEntity>().RemoveRange(entities);
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _Context.Set<TEntity>().SingleOrDefault(predicate);
         }
+
+        //public int Add(TEntity entity)
+        //{
+        //    _Context.Set<TEntity>().Add(entity);
+        //}
+
+        //public void Add(TEntity entity)
+        //{
+        //    _Context.Set<TEntity>().Add(entity);
+        //}
     }
 }

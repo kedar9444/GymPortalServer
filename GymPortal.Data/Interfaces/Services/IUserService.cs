@@ -13,5 +13,6 @@ namespace GymPortal.Data.Interfaces.Services
 
         User Get(int id);
         List<User> GetUsers();
+        int Add(User user);
     }
 }
